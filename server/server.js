@@ -3,10 +3,17 @@ const port = 3000;
 const path = require('path');
 const cors = require('cors');
 const app = express();
+const httpProxy = require('http-proxy');
 
-app.use(cors());
-app.use(express.static(path.resolve(__dirname, '../client/public')));
+const prox = httpProxy.createProxyServer();
 
+app.use('/:listingId', express.static(path.resolve(__dirname, '../client/public')));
+
+app.all('/photos/*', cors(), (req, res) => {
+  prox.web(req, res, {target: 'http://localhost:3050/'});
+});
+
+/*
 app.get('/:id', (req, res) => {
   if (!req.params.id) {
     res.status(400);
@@ -15,6 +22,7 @@ app.get('/:id', (req, res) => {
     res.sendFile('index.html', { root: path.resolve(__dirname, '../client/public') });
   }
 });
+*/
 
 app.listen(port, () => console.log(`Listening on port ${port}!`));
 
