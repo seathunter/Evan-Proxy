@@ -9,8 +9,8 @@ const prox = httpProxy.createProxyServer();
 
 app.use('/:listingId', express.static(path.resolve(__dirname, '../client/public')));
 
-app.all('/photos/*', cors(), (req, res) => {
-  prox.web(req, res, {target: 'http://localhost:3050/'});
+app.all('/listing/*', cors(), (req, res) => {
+  prox.web(req, res, {target: 'http://54.200.132.22:80/'});
 });
 
 /*
