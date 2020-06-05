@@ -8,11 +8,13 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "start": "nodemon server/server.js",
+    "start": "node server/server.js",
     "react-dev": "webpack -d --watch",
     "build": "webpack -d"
   },
-  "dependencies": {},
+  "dependencies": {
+    "axios": "^0.19.2"
+  },
   "devDependencies": {
     "cors": "^2.8.5",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
